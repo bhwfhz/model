@@ -1,17 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras.layers import (
-    Input,
-    ConvLSTM2D,
-    BatchNormalization,
-    Reshape,
-    LSTM,
-    Dense,
-    Dropout,
-    GlobalAveragePooling3D,
-    Multiply,
-    Activation,
-    Reshape as KReshape,
-    Layer
+    Input,ConvLSTM2D,BatchNormalization,Reshape,LSTM,Dense,Dropout,GlobalAveragePooling3D,Multiply,Activation,Reshape as KReshape,Layer
 )
 from tensorflow.keras.models import Model
 from tensorflow.keras.regularizers import l2
@@ -48,13 +37,7 @@ def squeeze_excitation_block(input_tensor, ratio=8):
 
 
 def build_hybrid_conv_lstm_lstm_se(
-        n_timesteps,
-        in_H,
-        in_W,
-        in_C,
-        out_H,
-        out_W,
-        out_C,
+        n_timesteps,in_H,in_W,in_C,out_H,out_W,out_C,
         conv_filters=16,
         conv_kernel=(9, 5),
         lstm_units=128,
