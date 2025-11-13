@@ -12,9 +12,9 @@ output_dir = r"C:\Users\保护我方虎子\Desktop\model\dataset\output"
 out_npz_dir = r"./processed_resampled_events"
 os.makedirs(out_npz_dir, exist_ok=True)
 
-# 原始采样率（你的描述）
-fs_input = 512.0   # 输入原始采样率
-fs_output = 250.0  # 输出原始采样率
+# 原始采样率
+fs_input = 512.0
+fs_output = 250.0  
 # 目标（统一）采样率，训练时可快速调整
 target_fs = 50.0
 
