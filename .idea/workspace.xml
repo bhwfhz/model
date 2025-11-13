@@ -6,6 +6,117 @@
   <component name="ChangeListManager">
     <list default="true" id="2205f6a8-eb4e-4248-8df7-59d9a82eb995" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/1.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/1.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/10.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/10.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/11.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/11.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/12.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/12.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/13.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/13.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/14.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/14.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/15.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/15.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/16.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/16.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/17.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/17.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/18.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/18.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/19.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/19.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/2.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/2.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/20.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/20.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/21.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/21.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/22.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/22.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/23.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/23.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/24.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/24.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/25.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/25.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/26.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/26.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/27.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/27.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/28.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/28.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/29.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/29.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/3.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/3.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/30.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/30.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/31.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/31.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/32.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/32.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/33.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/33.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/35.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/35.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/36.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/36.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/37.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/37.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/38.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/38.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/39.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/39.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/4.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/4.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/40.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/40.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/41.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/41.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/42.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/42.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/43.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/43.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/44.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/44.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/45.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/45.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/46.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/46.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/47.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/47.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/48.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/48.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/49.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/49.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/5.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/5.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/50.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/50.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/51.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/51.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/52.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/52.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/53.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/53.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/54.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/54.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/55.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/55.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/56.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/56.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/6.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/6.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/7.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/7.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/8.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/8.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/input/9.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/dataset/input/9.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/load_acc_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/load_acc_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/1.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/1.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/10.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/10.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/11.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/11.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/12.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/12.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/13.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/13.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/14.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/14.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/15.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/15.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/16.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/16.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/17.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/17.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/18.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/18.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/19.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/19.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/2.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/2.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/20.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/20.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/21.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/21.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/22.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/22.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/23.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/23.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/24.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/24.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/25.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/25.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/26.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/26.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/27.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/27.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/28.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/28.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/29.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/29.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/3.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/3.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/30.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/30.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/31.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/31.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/32.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/32.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/33.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/33.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/35.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/35.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/36.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/36.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/37.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/37.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/38.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/38.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/39.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/39.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/4.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/4.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/40.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/40.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/41.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/41.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/42.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/42.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/43.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/43.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/44.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/44.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/45.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/45.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/46.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/46.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/47.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/47.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/48.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/48.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/49.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/49.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/5.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/5.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/50.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/50.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/51.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/51.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/52.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/52.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/53.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/53.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/54.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/54.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/55.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/55.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/56.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/56.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/6.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/6.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/7.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/7.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/8.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/8.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed_resampled_events/9.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/9.npz" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,9 +141,39 @@
     "Python.多步预测的LSTM网络.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "main",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="load_acc_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="model" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/load_acc_data.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.load_acc_data" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -49,5 +190,16 @@
       <updated>1762918028186</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/load_acc_data.py</url>
+          <line>139</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
