@@ -19,7 +19,7 @@ os.makedirs(out_npz_dir, exist_ok=True)
 fs_input = 512.0
 fs_output = 250.0
 # 目标（统一）采样率，训练时可快速调整
-target_fs = 50.0
+target_fs = 250
 
 
 # 输入 Excel: 前7列有数据，第一列是时间，接下 3 列是加速度 (假设列索引 1..3 为 x,y,z)
