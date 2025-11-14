@@ -140,28 +140,56 @@ if len(input_files) != len(output_files):
 for i, inp_fp in enumerate(tqdm(input_files, desc="Processing events")):
     try:
         base = os.path.splitext(os.path.basename(inp_fp))[0]
-        # try to find matching output by same name or by index
-        # default: pair by sorted order
-        out_fp = None
-        # first try same base name in output dir
+        # 对应 output 文件
         candidate = os.path.join(output_dir, base + ".xlsx")
         if os.path.exists(candidate):
             out_fp = candidate
         else:
-            # fallback: by index if available
             if i < len(output_files):
                 out_fp = output_files[i]
             else:
-                print(f"找不到配对输出文件给 {inp_fp}, 跳过")
+                print(f"[跳过] 找不到配对输出文件给 {inp_fp}")
                 continue
 
-        x_raw = read_and_proc_input(inp_fp)     # (T_in, 3)
-        y_raw = read_and_proc_output(out_fp)    # (T_out, 9, 3)
+        # 读取原始（未重采样）数据
+        x_raw = read_and_proc_input(inp_fp)     # shape (T_in, 3)
+        y_raw = read_and_proc_output(out_fp)    # shape (T_out, 9, 3)
 
+        # ---------- 对特定 event id 的输入通道做幅值校正（只修改输入三通道） ----------
+        scale = 1.0
+        try:
+            event_id = int(base)
+        except Exception:
+            import re
+            m = re.search(r'\d+', base)
+            event_id = int(m.group(0)) if m else None
+
+        if event_id is not None and 23 <= event_id <= 56:
+            scale = 1.1
+            x_raw = (x_raw * scale).astype(np.float32)
+            print(f"{base}: applied INPUT scale={scale} to channels for event id {event_id}")
+
+        # ---------- 重采样（input 与 output） ----------
         x_res, y_res = resample_event(x_raw, fs_input, target_fs, y_out=y_raw, fs_out=fs_output)
 
+        # 打印长度对比，便于检查
+        try:
+            print(f"{base}: input {x_raw.shape[0]} -> {x_res.shape[0]} samples ({x_res.shape[0]/target_fs:.2f}s @ {target_fs}Hz), "
+                  f"output {y_raw.shape[0]} -> {y_res.shape[0]} samples ({y_res.shape[0]/target_fs:.2f}s @ {target_fs}Hz)")
+        except Exception:
+            pass
+
+        # ---------- 保存 .npz（使用压缩，meta 更全面） ----------
         save_path = os.path.join(out_npz_dir, f"{base}.npz")
-        np.savez(save_path, X=x_res, Y=y_res, meta={"orig_input_len": x_raw.shape[0], "orig_output_len": y_raw.shape[0], "fs_target": target_fs})
+        meta = {
+            "orig_input_len": int(x_raw.shape[0]),
+            "orig_output_len": int(y_raw.shape[0]),
+            "resampled_input_len": int(x_res.shape[0]),
+            "resampled_output_len": int(y_res.shape[0]) if y_res is not None else None,
+            "fs_target": float(target_fs),
+            "applied_input_scale": float(scale) if scale != 1.0 else None
+        }
+        np.savez_compressed(save_path, X=x_res, Y=y_res, meta=meta)
         print(f"Saved {save_path}  X:{x_res.shape}  Y:{None if y_res is None else y_res.shape}")
 
     except Exception as e:
