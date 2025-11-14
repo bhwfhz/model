@@ -59,44 +59,76 @@ ckpt_filepath = "best_model_seq2seq.h5"
 
 # ---------------- Helper: generate samples ----------------
 def generate_xy_from_files(file_list, window_size=window_size, stride=stride, out_steps=out_steps):
+    """
+    从 per-event npz 里生成滑窗样本（修正版）
+    - 将标签与窗口**起点对齐**：y_seq = Y_event[start : start + out_steps]
+    - 若未来不足 out_steps，会 pad 最后一帧（避免大量样本被跳过）
+    返回:
+      X_arr: (N, window_size, in_H, in_W, in_C)
+      Y_arr: (N, out_steps, out_H, out_W, out_C)
+    """
     Xs = []
     Ys = []
-    skipped_events = 0
+    skipped_short_input = 0
+    skipped_short_output = 0
     for fp in file_list:
         data = np.load(fp, allow_pickle=True)
-        X_event = data['X'].astype(np.float32)  # (T_in, 3)
-        Y_event = data['Y'].astype(np.float32)  # (T_out, 9, 3)
-        T_in = X_event.shape[0]
+        X_event = data['X']  # shape (T_in, 3)
+        Y_event = data['Y']  # shape (T_out, 9, 3)
+        T = X_event.shape[0]
         T_out = Y_event.shape[0]
-        # We require that future segment [y_start : y_start + out_steps] fully exists.
-        # y_start is the time index immediately after window end.
-        max_start = T_in - window_size
-        if max_start < 0:
-            skipped_events += 1
+
+        if T < window_size:
+            skipped_short_input += 1
             continue
+
+        # max possible window start (inclusive)
+        max_start = T - window_size
         for start in range(0, max_start + 1, stride):
-            y_start = start + window_size  # first predicted index in Y_event
-            if y_start + out_steps > T_out:
-                # not enough future length in Y to form full out_steps -> skip this sample
+            # input window (aligned to start)
+            x_win = X_event[start: start + window_size]  # (window_size, 3)
+
+            # label segment: align by window start (not window end)
+            y_start = start
+            # take available portion
+            if y_start >= T_out:
+                # no overlap with Y (should rarely happen) -> skip this window
+                skipped_short_output += 1
                 continue
-            # form input window and target future sequence
-            x_win = X_event[start: start + window_size]    # (window_size, 3)
-            y_seq = Y_event[y_start: y_start + out_steps]   # (out_steps, 9, 3)
 
-            # reshape input to (window_size, in_H, in_W, in_C)
-            x5d = x_win.reshape(window_size, in_H, in_W, in_C).astype(np.float32)
-            # reshape y to (out_steps, out_H, out_W, out_C)
-            y5d = y_seq.reshape(out_steps, out_H, out_W, out_C).astype(np.float32)
+            available = Y_event[y_start: min(T_out, y_start + out_steps)]
+            if available.shape[0] < out_steps:
+                # pad by repeating last available frame if exists, else pad with zeros
+                if available.shape[0] == 0:
+                    # fallback: use last frame of Y_event (if exists) else zeros
+                    if T_out > 0:
+                        pad_block = np.repeat(Y_event[-1:], out_steps, axis=0)
+                    else:
+                        pad_block = np.zeros((out_steps, out_H, out_W, out_C), dtype=np.float32)
+                    y_seq = pad_block
+                else:
+                    pad_len = out_steps - available.shape[0]
+                    last = available[-1:]
+                    pad_block = np.repeat(last, pad_len, axis=0)
+                    y_seq = np.concatenate([available, pad_block], axis=0)
+            else:
+                y_seq = available[:out_steps]
 
+            # reshape to model expected dims
+            x5d = x_win.reshape(window_size, in_H, in_W, in_C).astype(np.float32)   # (window_size,3,1,1)
+            y5d = y_seq.reshape(out_steps, out_H, out_W, out_C).astype(np.float32)  # (out_steps,9,1,3)
             Xs.append(x5d)
             Ys.append(y5d)
 
-    if len(Xs) == 0:
-        raise RuntimeError("未生成任何训练样本 — 请确认 processed_resampled_events 中的事件长度足够或调整 window/out_steps/stride 设置。")
+    if not Xs:
+        raise RuntimeError(
+            f"未生成任何样本 (skipped_short_input={skipped_short_input}, skipped_short_output={skipped_short_output}). "
+            f"请检查 processed_resampled_events 中的 X/Y 长度 或 调整 window/out_steps/stride。"
+        )
 
-    X_arr = np.stack(Xs, axis=0)   # (N, window_size, in_H, in_W, in_C)
-    Y_arr = np.stack(Ys, axis=0)   # (N, out_steps, out_H, out_W, out_C)
-    print(f"Generated samples: X {X_arr.shape}, Y {Y_arr.shape}, skipped_events {skipped_events}")
+    X_arr = np.stack(Xs, axis=0).astype(np.float32)
+    Y_arr = np.stack(Ys, axis=0).astype(np.float32)
+    print(f"Generated samples: X {X_arr.shape}, Y {Y_arr.shape}, skipped_short_input={skipped_short_input}, skipped_short_output={skipped_short_output}")
     return X_arr, Y_arr
 
 # ---------------- Data loading & normalization ----------------
