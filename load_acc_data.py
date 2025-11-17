@@ -19,8 +19,7 @@ os.makedirs(out_npz_dir, exist_ok=True)
 # 原始采样率
 fs_input = 512.0
 fs_output = 250.0
-
-target_fs = 250
+target_fs = 50
 
 # 期望时长（秒）
 expected_in_seconds = 16.0
@@ -79,7 +78,7 @@ def read_and_proc_output(fp):
     out3 = out_flat.reshape((-1, 9, 3))
     return out3
 
-def _rational_approx(u, v, max_den=1000):
+def _rational_approx(u, v, max_den=1000):            #对浮点数进行有理数近似
     frac = Fraction(str(u)) / Fraction(str(v))
     frac = frac.limit_denominator(max_den)
     return frac.numerator, frac.denominator

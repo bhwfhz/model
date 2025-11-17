@@ -1,4 +1,4 @@
-# model4.py
+# model.py
 import tensorflow as tf
 from tensorflow.keras.layers import (
     Input, ConvLSTM2D, BatchNormalization, Reshape, LSTM, Dense, Dropout,
@@ -41,8 +41,8 @@ def build_hybrid_conv_lstm_seq2seq(
     """
     # clamp conv kernel to spatial dims (safe-guard)
     kh, kw = conv_kernel
-    kh = int(min(kh, max(1, in_H)))
-    kw = int(min(kw, max(1, in_W)))
+    kh = int(min(kh, max(1, in_H)))    # 确保卷积核高度不超过输入高度
+    kw = int(min(kw, max(1, in_W)))    # 确保卷积核高度不超过输入宽度
     conv_kernel = (kh, kw)
 
     inputs = Input(shape=(n_timesteps, in_H, in_W, in_C), name='encoder_input')  # (batch, T, H, W, C)

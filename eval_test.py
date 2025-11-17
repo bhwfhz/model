@@ -9,7 +9,7 @@ from scipy.signal import butter, filtfilt
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 # If you prefer, use keras.models.load_model when loading a full model; here we build architecture and load weights.
-from model4 import build_hybrid_conv_lstm_lstm_se
+from model import build_hybrid_conv_lstm_lstm_se
 
 # Optional: h5py used for diagnostics if weights fail to load
 try:

@@ -21,7 +21,7 @@ import tensorflow as tf
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import ReduceLROnPlateau
 
-from model4 import build_hybrid_conv_lstm_seq2seq
+from model import build_hybrid_conv_lstm_seq2seq
 
 # reproducibility
 np.random.seed(42)
