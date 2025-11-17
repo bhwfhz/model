@@ -6,49 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2205f6a8-eb4e-4248-8df7-59d9a82eb995" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/load_acc_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/load_acc_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/1.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/1.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/10.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/10.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/11.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/11.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/12.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/12.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/13.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/13.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/14.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/14.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/15.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/15.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/16.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/16.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/17.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/17.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/18.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/18.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/19.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/19.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/2.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/2.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/20.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/20.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/21.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/21.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/22.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/22.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/23.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/23.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/24.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/24.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/25.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/25.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/26.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/26.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/27.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/27.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/28.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/28.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/29.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/29.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/3.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/3.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/30.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/30.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/31.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/31.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/32.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/32.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/33.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/33.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/35.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/35.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/36.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/36.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/37.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/37.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/38.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/38.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/39.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/39.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/4.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/4.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/40.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/40.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/41.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/41.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/42.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/42.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/43.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/43.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/44.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/44.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/45.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/45.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/46.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/46.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/47.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/47.npz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processed_resampled_events/48.npz" beforeDir="false" afterPath="$PROJECT_DIR$/processed_resampled_events/48.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

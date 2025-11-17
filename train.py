@@ -1,16 +1,5 @@
 # train_resampled.py
-"""
-Multi-step training script for resampled dataset.
-Assumes processed_resampled_events/*.npz exist, each containing:
-  - X: (T_in, 3)  # axes order: z, y, x (as we prepared)
-  - Y: (T_out, 9, 3)
 
-This script generates (X_window, Y_future) training pairs:
-  - X_window shape: (window_size, in_H, in_W, in_C)
-  - Y_future shape: (out_steps, out_H, out_W, out_C)
-
-Configuration near the top — change target_fs/window_seconds/out_seconds as needed.
-"""
 import os
 import glob
 import json
@@ -36,10 +25,10 @@ target_fs = 50.0          # must match preprocessing resample target
 window_seconds = 16.0
 out_seconds = 60.0
 
-window_size = int(round(window_seconds * target_fs))   # e.g., 800
-out_steps = int(round(out_seconds * target_fs))        # e.g., 3000
+window_size = int(round(window_seconds * target_fs))   #  800
+out_steps = int(round(out_seconds * target_fs))        #  3000
 stride_seconds = 1.0
-stride = max(1, int(round(stride_seconds * target_fs)))   # e.g., 50 -> slide by 1s, adjust as needed
+stride = max(1, int(round(stride_seconds * target_fs)))   # 50 -> slide by 1s, adjust as needed
 
 # Input spatialization: treat 3 axes as spatial height
 in_H, in_W, in_C = 3, 1, 1
@@ -137,12 +126,21 @@ def load_and_prepare_data(processed_dir, val_split_ratio=0.10):
     if not files:
         raise RuntimeError(f"{processed_dir} 中未找到 .npz 文件")
 
-    # simple split by files: last val_split_ratio fraction as validation
-    n_files = len(files)
+    # ----- 随机划分 -----
+    # 在函数外或顶部配置一个 seed（这里示例用 42）
+    random_seed = 42
+    rng = np.random.RandomState(random_seed)
+
+    files_shuf = files.copy()
+    rng.shuffle(files_shuf)
+
+    n_files = len(files_shuf)
     n_val = max(1, int(round(n_files * val_split_ratio)))
-    train_files = files[:-n_val]
-    val_files = files[-n_val:]
-    print(f"Using {len(train_files)} train files and {len(val_files)} val files.")
+    val_files = files_shuf[:n_val]
+    train_files = files_shuf[n_val:]
+
+    print(
+        f"Using {len(train_files)} train files and {len(val_files)} val files (random split, seed={random_seed}).")
 
     X_train, Y_train = generate_xy_from_files(train_files, window_size=window_size, stride=stride, out_steps=out_steps)
     X_val, Y_val = generate_xy_from_files(val_files, window_size=window_size, stride=stride, out_steps=out_steps)
@@ -180,19 +178,21 @@ def build_and_compile_model(params):
         dropout_rate=float(params.get('dropout', dropout_rate)),
         l2_reg=float(params.get('l2_reg', l2_reg))
     )
-    lr = float(params.get('lr', 1e-3))
-    opt = Adam(learning_rate=lr)
-    model.compile(optimizer=opt, loss=combined_loss, metrics=['mae'])
+    lr = float(params.get('lr', 1e-3))     # 学习率
+    opt = Adam(learning_rate=lr)           # 优化器
+    model.compile(optimizer=opt, loss=combined_loss, metrics=['mae'])         # 模型编译
     return model
 
 # ---------------- Training wrapper ----------------
 def train_main():
     t0 = time.time()
     X_train, Y_train, X_val, Y_val, scalers = load_and_prepare_data(processed_dir, val_split_ratio=0.10)
-    # Save scalers
+
+    # 保存标准化参数
     np.savez("scalers_seq2seq_resampled.npz", mean_X=scalers['mean_X'], std_X=scalers['std_X'],
              mean_Y=scalers['mean_Y'], std_Y=scalers['std_Y'], target_fs=target_fs)
 
+    # 模型参数设置
     params = {
         'conv_filters': conv_filters,
         'conv_kh': conv_kh, 'conv_kw': conv_kw,
@@ -200,15 +200,16 @@ def train_main():
         'dropout': dropout_rate, 'l2_reg': l2_reg, 'lr': 1e-3
     }
 
+    # 模型构建和查看
     model = build_and_compile_model(params)
     model.summary()
-
+    # 回调函数设置：早停、模型保存、学习率调度
     callbacks = [
         tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=8, restore_best_weights=True),
         tf.keras.callbacks.ModelCheckpoint(ckpt_filepath, monitor='val_loss', save_best_only=True, save_weights_only=True),
         ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=4, min_lr=1e-6)
     ]
-
+    # 模型训练
     history = model.fit(
         X_train, Y_train,
         validation_data=(X_val, Y_val),
@@ -218,12 +219,15 @@ def train_main():
         shuffle=True
     )
 
-    # save history and params
+    # 保存训练历史
     with open("train_history_seq2seq.json", "w") as f:
         json.dump({k: [float(x) for x in v] for k, v in history.history.items()}, f)
+
+    # 保存最佳参数
     with open("best_params_seq2seq.json", "w") as f:
         json.dump(params, f, indent=2)
 
+    # 最终权重保存
     model.save_weights(ckpt_filepath)
     print(f"Training finished. Weights saved to {ckpt_filepath}. Elapsed { (time.time()-t0)/3600:.2f} hours")
 
