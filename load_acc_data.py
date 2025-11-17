@@ -94,32 +94,16 @@ def resample_event(x_in, fs_in, fs_target, y_out=None, fs_out=None, max_denomina
         x_res = x_in.astype(np.float32)
     else:
         up, down = _rational_approx(fs_target, fs_in, max_den=max_denominator)
-        if up > 2000 or down > 2000:
-            T_in = x_in.shape[0]
-            t_old = np.linspace(0.0, (T_in - 1) / fs_in, T_in)
-            T_new = int(round((T_in - 1) * fs_target / fs_in)) + 1
-            t_new = np.linspace(0.0, (T_new - 1) / fs_target, T_new)
-            f = interp1d(t_old, x_in, axis=0, kind='linear', fill_value='extrapolate')
-            x_res = f(t_new).astype(np.float32)
-        else:
-            x_res = resample_poly(x_in, up, down, axis=0).astype(np.float32)
+        x_res = resample_poly(x_in, up, down, axis=0).astype(np.float32)
 
-    # --- 处理 y_out (可选) ---
+
     y_res = None
     if y_out is not None and fs_out is not None:
         if fs_out == fs_target:
             y_res = y_out.astype(np.float32)
         else:
-            up_y, down_y = _rational_approx(fs_target, fs_out, max_den=max_denominator)
-            if up_y > 2000 or down_y > 2000:
-                T_y = y_out.shape[0]
-                t_old = np.linspace(0.0, (T_y - 1) / fs_out, T_y)
-                T_new = int(round((T_y - 1) * fs_target / fs_out)) + 1
-                t_new = np.linspace(0.0, (T_new - 1) / fs_target, T_new)
-                f_y = interp1d(t_old, y_out, axis=0, kind='linear', fill_value='extrapolate')
-                y_res = f_y(t_new).astype(np.float32)
-            else:
-                y_res = resample_poly(y_out, up_y, down_y, axis=0).astype(np.float32)
+            up, down = _rational_approx(fs_target, fs_out, max_den=max_denominator)
+            y_res = resample_poly(y_out, up, down, axis=0).astype(np.float32)
 
     return x_res, y_res
 
@@ -144,7 +128,7 @@ if len(input_files) != len(output_files):
 expected_in_len = int(round(expected_in_seconds * target_fs))
 expected_out_len = int(round(expected_out_seconds * target_fs))
 
-for i, inp_fp in enumerate(tqdm(input_files, desc="Processing events")):
+for i, inp_fp in enumerate(tqdm(input_files, desc="Processing events")):      # 同名配对
     try:
         base = os.path.splitext(os.path.basename(inp_fp))[0]
         # 找对应输出文件：优先同名，否则按索引位置配对
@@ -181,10 +165,10 @@ for i, inp_fp in enumerate(tqdm(input_files, desc="Processing events")):
         # ---------- 强制统一长度（截断或填充） ----------
         # 处理输入长度
         x_res = x_res.astype(np.float32)
-        if x_res.shape[0] > expected_in_len:
+        if x_res.shape[0] > expected_in_len:                   # 截断
             x_res = x_res[:expected_in_len]
             print(f"{base}: x_res truncated to {expected_in_len}")
-        elif x_res.shape[0] < expected_in_len:
+        elif x_res.shape[0] < expected_in_len:                 # 填充
             pad_len_x = expected_in_len - x_res.shape[0]
             last_x = x_res[-1:]
             pad_block_x = np.repeat(last_x, pad_len_x, axis=0)
@@ -220,7 +204,6 @@ for i, inp_fp in enumerate(tqdm(input_files, desc="Processing events")):
             "resampled_output_len": int(y_res.shape[0]),
             "fs_target": float(target_fs),
             "applied_input_scale": float(scale) if scale != 1.0 else None,
-            "applied_output_pad": bool(applied_pad)
         }
         np.savez_compressed(save_path, X=x_res, Y=y_res, meta=meta)
         print(f"Saved {save_path}  X:{x_res.shape}  Y:{y_res.shape}")
