@@ -1,0 +1,10 @@
+{
+  "conv_filters": 16,
+  "conv_kh": 3,
+  "conv_kw": 1,
+  "encoder_lstm_units": 128,
+  "decoder_lstm_units": 128,
+  "dropout": 0.3,
+  "l2_reg": 0.0003,
+  "lr": 0.001
+}

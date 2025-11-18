@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2205f6a8-eb4e-4248-8df7-59d9a82eb995" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scalers_seq2seq_resampled.npz" beforeDir="false" afterPath="$PROJECT_DIR$/scalers_seq2seq_resampled.npz" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,22 +31,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.load_acc_data.executor": "Run",
-    "Python.model (1).executor": "Run",
-    "Python.model4.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.train.executor": "Run",
-    "Python.多步预测的LSTM网络.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.load_acc_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.model (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.model4.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.train.executor&quot;: &quot;Run&quot;,
+    &quot;Python.多步预测的LSTM网络.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Python.load_acc_data">
+}</component>
+  <component name="RunManager" selected="Python.train">
     <configuration name="diagnosis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="model" />
       <option name="ENV_FILES" value="" />
@@ -159,11 +159,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.train" />
         <item itemvalue="Python.load_acc_data" />
         <item itemvalue="Python.model (1)" />
-        <item itemvalue="Python.train" />
         <item itemvalue="Python.diagnosis" />
-        <item itemvalue="Python.model4" />
       </list>
     </recent_temporary>
   </component>
