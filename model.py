@@ -1,89 +1,43 @@
 # model.py
 import tensorflow as tf
-from tensorflow.keras.layers import (
-    Input, ConvLSTM2D, BatchNormalization, Reshape, LSTM, Dense, Dropout,
-    GlobalAveragePooling3D, Multiply, Reshape as KReshape, RepeatVector,
-    TimeDistributed
-)
-from tensorflow.keras.models import Model
-from tensorflow.keras.regularizers import l2
 
-def squeeze_excitation_block(input_tensor, ratio=8):
-    channel_axis = -1
-    filters = int(input_tensor.shape[channel_axis])
-    se = GlobalAveragePooling3D()(input_tensor)               # (batch, filters)
-    se = KReshape((1,1,1,filters))(se)                       # (batch,1,1,1,filters)
-    se = Dense(filters // ratio, activation='relu', use_bias=False, kernel_initializer='he_normal')(se)
-    se = Dense(filters, activation='sigmoid', use_bias=False, kernel_initializer='he_normal')(se)
-    x = Multiply()([input_tensor, se])
-    return x
 
-def build_hybrid_conv_lstm_seq2seq(
-        n_timesteps, in_H, in_W, in_C,
-        out_steps, out_H, out_W, out_C,
-        conv_filters=16,
-        conv_kernel=(3,1),
-        encoder_lstm_units=128,
-        decoder_lstm_units=128,
-        dropout_rate=0.3,
-        l2_reg=3e-4,
-        se_ratio=8
-):
-    """
-    Seq2Seq variant:
-      Encoder: ConvLSTM2D -> BN -> SE -> reshape -> LSTM(s) -> encoding vector
-      Decoder: RepeatVector(out_steps) -> LSTM(return_sequences=True) -> TimeDistributed(Dense) -> reshape output (out_steps, out_H, out_W, out_C)
-    Inputs:
-      n_timesteps: input window length (time)
-      in_H,in_W,in_C: spatial dims for ConvLSTM input
-      out_steps: number of future time steps to predict
-      out_H,out_W,out_C: spatial dims for output at each time step
-    """
-    # clamp conv kernel to spatial dims (safe-guard)
-    kh, kw = conv_kernel
-    kh = int(min(kh, max(1, in_H)))    # 确保卷积核高度不超过输入高度
-    kw = int(min(kw, max(1, in_W)))    # 确保卷积核高度不超过输入宽度
-    conv_kernel = (kh, kw)
+def build_model(input_len=800, pred_len=100, in_ch=3, out_ch=27):
+    inputs = tf.keras.Input(shape=(input_len, in_ch))
+    x = inputs
 
-    inputs = Input(shape=(n_timesteps, in_H, in_W, in_C), name='encoder_input')  # (batch, T, H, W, C)
+    # 膨胀卷积骨干（感受野 > 16s）
+    for dilation_rate in [1, 2, 4, 8, 16]:
+        x = tf.keras.layers.Conv1D(64, kernel_size=3, padding='causal',
+                                   dilation_rate=dilation_rate)(x)
+        x = tf.keras.layers.BatchNormalization()(x)
+        x = tf.keras.layers.ReLU()(x)
 
-    # Encoder: ConvLSTM -> BN -> SE
-    x = ConvLSTM2D(filters=conv_filters, kernel_size=conv_kernel, padding='same',
-                   return_sequences=True, kernel_regularizer=l2(l2_reg), name='conv_lstm')(inputs)
-    x = BatchNormalization(name='bn_after_conv')(x)
-    x = squeeze_excitation_block(x, ratio=se_ratio)
+    # 轻量Transformer（2层）
+    for _ in range(2):
+        attn = tf.keras.layers.MultiHeadAttention(8, 64)(x, x)
+        x = tf.keras.layers.Add()([x, attn])
+        x = tf.keras.layers.LayerNormalization()(x)
 
-    # Flatten time+space to sequence of features for LSTM
-    feat_dim = in_H * in_W * conv_filters
-    x = Reshape(target_shape=(n_timesteps, feat_dim), name='reshape_for_encoder_lstm')(x)
+        ff = tf.keras.layers.Dense(256, activation='relu')(x)
+        ff = tf.keras.layers.Dense(64)(ff)
+        x = tf.keras.layers.Add()([x, ff])
+        x = tf.keras.layers.LayerNormalization()(x)
 
-    # Encoder LSTM(s)
-    x = LSTM(units=encoder_lstm_units, return_sequences=False, kernel_regularizer=l2(l2_reg), name='encoder_lstm')(x)
-    x = Dropout(rate=dropout_rate, name='encoder_dropout')(x)   # x is (batch, encoder_lstm_units)
+    # 关键修复：先把 x 从 (batch, 800, 64) 取最后时刻，再挤压成 2D
+    last_step = x[:, -1, :]  # (batch, 64)
+    repeated = tf.keras.layers.RepeatVector(pred_len)(last_step)  # (batch, pred_len, 64)
 
-    # Decoder: repeat encoded vector out_steps times -> LSTM (return_sequences=True) -> TimeDistributed Dense
-    d = RepeatVector(out_steps, name='repeat_for_decoder')(x)      # (batch, out_steps, encoder_lstm_units)
+    # 再接几层解码器，把64维映射到27维
+    x = tf.keras.layers.Conv1D(128, 3, padding='same', activation='relu')(repeated)
+    x = tf.keras.layers.Conv1D(64, 3, padding='same', activation='relu')(x)
+    outputs = tf.keras.layers.Conv1D(out_ch, 1, activation='linear')(x)  # (batch, pred_len, 27)
 
-    d = LSTM(units=decoder_lstm_units, return_sequences=True, name='decoder_lstm')(d)  # (batch, out_steps, decoder_lstm_units)
-    d = Dropout(rate=dropout_rate, name='decoder_dropout')(d)
-
-    # Map each time-step to output channels (out_H * out_W * out_C)
-    per_step_units = out_H * out_W * out_C
-    d = TimeDistributed(Dense(units=per_step_units, activation=None), name='time_distributed_dense')(d)  # (batch, out_steps, per_step_units)
-
-    # reshape to (batch, out_steps, out_H, out_W, out_C)
-    outputs = Reshape(target_shape=(out_steps, out_H, out_W, out_C), name='final_output')(d)
-
-    model = Model(inputs=inputs, outputs=outputs, name='hybrid_conv_lstm_seq2seq')
+    model = tf.keras.Model(inputs, outputs)
     return model
 
 
+# 直接跑一下看形状对不对
 if __name__ == "__main__":
-    # quick sanity-check model summary with example dims
-    model = build_hybrid_conv_lstm_seq2seq(
-        n_timesteps=800, in_H=3, in_W=1, in_C=1,
-        out_steps=3000, out_H=9, out_W=1, out_C=3,
-        conv_filters=16, conv_kernel=(3,1),
-        encoder_lstm_units=128, decoder_lstm_units=128
-    )
+    model = build_model(pred_len=100)
     model.summary()
