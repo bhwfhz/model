@@ -5,6 +5,7 @@ import glob
 import json
 import pickle
 import time
+import re
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.optimizers import Adam
@@ -126,21 +127,47 @@ def load_and_prepare_data(processed_dir, val_split_ratio=0.10):
     if not files:
         raise RuntimeError(f"{processed_dir} 中未找到 .npz 文件")
 
-    # ----- 随机划分 -----
-    # 在函数外或顶部配置一个 seed（这里示例用 42）
-    random_seed = 42
-    rng = np.random.RandomState(random_seed)
+    VAL_IDS = [44, 39, 34, 29, 24, 19, 14]  # 作为验证集（按你给的）
+    # 你指定的测试集事件（训练脚本这里只需排除这些测试文件）
+    TEST_IDS = [43, 38, 33, 28, 23, 18, 13]  # 这些我们会从训练集中去掉（用于 eval 脚本）
 
-    files_shuf = files.copy()
-    rng.shuffle(files_shuf)
+    # 将 files 列表按 basename 提取数字并分配到 train/val/test
+    def basename_id(fp):
+        bn = os.path.splitext(os.path.basename(fp))[0]
+        m = re.search(r'\d+', bn)
+        return int(m.group(0)) if m else None
 
-    n_files = len(files_shuf)
-    n_val = max(1, int(round(n_files * val_split_ratio)))
-    val_files = files_shuf[:n_val]
-    train_files = files_shuf[n_val:]
+    train_files = []
+    val_files = []
+    test_files = []  # 训练脚本可保存供 eval 使用，但训练时不使用 test_files
+
+    for fp in files:
+        eid = basename_id(fp)
+        if eid is None:
+            continue
+        if eid in VAL_IDS:
+            val_files.append(fp)
+        elif eid in TEST_IDS:
+            test_files.append(fp)
+        else:
+            train_files.append(fp)
 
     print(
-        f"Using {len(train_files)} train files and {len(val_files)} val files (random split, seed={random_seed}).")
+        f"Using {len(train_files)} train files, {len(val_files)} val files, {len(test_files)} test files (explicit lists).")
+
+    # 可选：把划分保存为 json 便于复现/审计（推荐）
+    try:
+        split_info = {
+            "val_ids": VAL_IDS, "test_ids": TEST_IDS,
+            "train": [os.path.basename(p) for p in train_files],
+            "val": [os.path.basename(p) for p in val_files],
+            "test": [os.path.basename(p) for p in test_files]
+        }
+        import json
+        with open("train_val_test_split.json", "w", encoding="utf-8") as f:
+            json.dump(split_info, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        print("Warning: failed to save split info:", e)
 
     X_train, Y_train = generate_xy_from_files(train_files, window_size=window_size, stride=stride, out_steps=out_steps)
     X_val, Y_val = generate_xy_from_files(val_files, window_size=window_size, stride=stride, out_steps=out_steps)
@@ -230,6 +257,8 @@ def train_main():
     # 最终权重保存
     model.save_weights(ckpt_filepath)
     print(f"Training finished. Weights saved to {ckpt_filepath}. Elapsed { (time.time()-t0)/3600:.2f} hours")
+
+
 
 if __name__ == "__main__":
     train_main()
