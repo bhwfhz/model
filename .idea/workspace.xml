@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2205f6a8-eb4e-4248-8df7-59d9a82eb995" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/eval_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/best_model_seq2seq.h5" beforeDir="false" afterPath="$PROJECT_DIR$/best_model_seq2seq.h5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scalers_seq2seq_resampled.npz" beforeDir="false" afterPath="$PROJECT_DIR$/scalers_seq2seq_resampled.npz" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +48,7 @@
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.eval_test">
+  <component name="RunManager" selected="Python.train">
     <configuration name="diagnosis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="model" />
       <option name="ENV_FILES" value="" />
@@ -161,8 +161,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.eval_test" />
         <item itemvalue="Python.train" />
+        <item itemvalue="Python.eval_test" />
         <item itemvalue="Python.load_acc_data" />
         <item itemvalue="Python.model (1)" />
         <item itemvalue="Python.diagnosis" />
