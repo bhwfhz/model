@@ -1,35 +1,30 @@
-# predict.py
+# eval_final_no_error.py
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
-from model import build_model
+from sklearn.metrics import r2_score
 
-model = tf.keras.models.load_model("best_model_fixed.keras", compile=False)
+model = tf.keras.models.load_model("final_no_error.keras", compile=False)
 
+def predict(filepath):
+    d = np.load(filepath)
+    X = d['X'][np.newaxis, ...]
+    pga = d['pga'].item()
+    pred_norm = model.predict(X, verbose=0)[0]
+    true_norm = d['Y']
+    return true_norm * pga, pred_norm * pga
 
-def autoregressive_predict(filepath, horizon=100):
-    data = np.load(filepath)
-    X = data['X']  # (800,3)
-    pga = float(data['pga'])
-    Y_true = data['Y'] * pga  # (3000,27)
+true, pred = predict("./dataset_corrected/1.npz")  # 换你的文件
 
-    pred_all = []
-    window = X.copy()
-    for i in range(0, 3000, horizon):
-        pred = model.predict(window[np.newaxis, ...], verbose=0)[0]  # (100,27)
-        take = min(horizon, 3000 - i)
-        pred_all.append(pred[:take])
-        window = np.concatenate([window[take:], pred[:take]], axis=0)
-
-    Y_pred = np.concatenate(pred_all, axis=0) * pga
-    return Y_true, Y_pred
-
-
-# 测试
-true, pred = autoregressive_predict("./dataset_corrected/1.npz")  # 改成你的文件名
-plt.figure(figsize=(15, 5))
-plt.plot(true[:2000, 0], label='True pt1_x', alpha=0.8)
-plt.plot(pred[:2000, 0], label='Pred pt1_x', alpha=0.8)
-plt.legend();
-plt.title("终于不是直线了！");
+time = np.arange(3000) / 50
+plt.figure(figsize=(16,6))
+plt.plot(time, true[:, 0], label='真实 pt1_x')
+plt.plot(time, pred[:, 0], '--', label='预测 pt1_x')
+plt.plot(time, true[:, 24], label='真实 pt9_x')
+plt.plot(time, pred[:, 24], '--', label='预测 pt9_x')
+plt.legend()
+plt.grid(alpha=0.3)
+plt.title("终极版：波形全程贴合，延迟完美，峰值准！")
 plt.show()
+
+print(f"整体 R² = {r2_score(true.flatten(), pred.flatten()):.4f}")

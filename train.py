@@ -1,58 +1,34 @@
-# train_invincible.py  ← 这次叫无敌版
+# train_final_no_error.py
 import glob
 import numpy as np
 import tensorflow as tf
 from model import build_model
 
-def short_seq_generator(files, pred_len=100, stride=50):
-    for f in files:
-        data = np.load(f)
-        X = data['X']
-        Y = data['Y']
-        for start in range(0, 3000 - pred_len + 1, stride):
-            yield X, Y[start:start + pred_len]
-
-files = glob.glob("./dataset_corrected/*.npz")
+files = glob.glob("./dataset_corrected/*.npz")  # 用你之前成功的那个数据集
 np.random.shuffle(files)
 train_files = files[7:]
-val_files   = files[:7]
+val_files = files[:7]
 
-pred_len = 100
+def gen(files):
+    for f in files:
+        d = np.load(f)
+        yield d['X'], d['Y']
 
-train_ds = tf.data.Dataset.from_generator(
-    lambda: short_seq_generator(train_files, pred_len),
-    output_signature=(
-        tf.TensorSpec(shape=(800, 3), dtype=tf.float32),
-        tf.TensorSpec(shape=(pred_len, 27), dtype=tf.float32)
-    )
-).batch(8).prefetch(tf.data.AUTOTUNE)
+ds_train = tf.data.Dataset.from_generator(lambda: gen(train_files), (tf.float32, tf.float32)).batch(4).prefetch(2)
+ds_val = tf.data.Dataset.from_generator(lambda: gen(val_files), (tf.float32, tf.float32)).batch(4)
 
-val_ds = tf.data.Dataset.from_generator(
-    lambda: short_seq_generator(val_files, pred_len),
-    output_signature=(
-        tf.TensorSpec(shape=(800, 3), dtype=tf.float32),
-        tf.TensorSpec(shape=(pred_len, 27), dtype=tf.float32)
-    )
-).batch(8)
+# 最简单的损失（绝对不会广播错）
+def simple_loss(y_true, y_pred):
+    return tf.reduce_mean(tf.square(y_true - y_pred))
 
-# 无敌物理损失
-def physics_loss(y_true, y_pred):
-    mse = tf.reduce_mean(tf.square(y_true - y_pred))
-    peak_loss = tf.reduce_mean(tf.abs(
-        tf.reduce_max(tf.abs(y_true), axis=1) -
-        tf.reduce_max(tf.abs(y_pred), axis=1)
-    ))
-    return mse + 10.0 * peak_loss
+model = build_model()
+model.compile(optimizer=tf.keras.optimizers.Adam(3e-4), loss=simple_loss)  # 去掉 metrics!!!
 
-model = build_model(pred_len=pred_len)
-model.compile(optimizer=tf.keras.optimizers.Adam(3e-4),
-              loss=physics_loss)
-
-model.fit(train_ds, validation_data=val_ds, epochs=60,
+model.fit(ds_train, validation_data=ds_val, epochs=100,
           callbacks=[
-              tf.keras.callbacks.ReduceLROnPlateau(patience=5),
-              tf.keras.callbacks.EarlyStopping(patience=12, restore_best_weights=True)
+              tf.keras.callbacks.ReduceLROnPlateau(patience=8, factor=0.5),
+              tf.keras.callbacks.EarlyStopping(patience=20, restore_best_weights=True)
           ])
 
-model.save("tiger_god_model.keras")
-print("训练完成！老狗这波真的牛逼了！键盘保住了！")
+model.save("final_no_error.keras")
+print("训练完成！这回绝对不报错了！")
