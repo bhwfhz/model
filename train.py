@@ -26,10 +26,10 @@ target_fs = 50.0          # must match preprocessing resample target
 window_seconds = 16.0
 out_seconds = 60.0
 
-window_size = int(round(window_seconds * target_fs))   #  800
-out_steps = int(round(out_seconds * target_fs))        #  3000
+window_size = 32   # 32
+out_steps = 3000        #  3000
 stride_seconds = 1.0
-stride = max(1, int(round(stride_seconds * target_fs)))   # 50 -> slide by 1s, adjust as needed
+stride = 32   # 50 -> slide by 1s, adjust as needed
 
 # Input spatialization: treat 3 axes as spatial height
 in_H, in_W, in_C = 3, 1, 1
@@ -43,8 +43,8 @@ decoder_lstm_units = 128
 dropout_rate = 0.3
 l2_reg = 3e-4
 
-batch_size = 4     # multi-step outputs can be large — start small and increase if memory allows
-epochs = 60
+batch_size = 16     # multi-step outputs can be large — start small and increase if memory allows
+epochs = 3000
 ckpt_filepath = "best_model_seq2seq.h5"
 
 # ---------------- Helper: generate samples ----------------
@@ -205,7 +205,7 @@ def build_and_compile_model(params):
         dropout_rate=float(params.get('dropout', dropout_rate)),
         l2_reg=float(params.get('l2_reg', l2_reg))
     )
-    lr = float(params.get('lr', 1e-3))     # 学习率
+    lr = float(params.get('lr', 0.01))     # 学习率
     opt = Adam(learning_rate=lr)           # 优化器
     model.compile(optimizer=opt, loss=combined_loss, metrics=['mae'])         # 模型编译
     return model
@@ -224,7 +224,7 @@ def train_main():
         'conv_filters': conv_filters,
         'conv_kh': conv_kh, 'conv_kw': conv_kw,
         'encoder_lstm_units': encoder_lstm_units, 'decoder_lstm_units': decoder_lstm_units,
-        'dropout': dropout_rate, 'l2_reg': l2_reg, 'lr': 1e-3
+        'dropout': dropout_rate, 'l2_reg': l2_reg, 'lr': 0.01
     }
 
     # 模型构建和查看

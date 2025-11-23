@@ -1,5 +1,6 @@
 # model.py
 import tensorflow as tf
+from tensorflow.keras.layers import Conv3D
 from tensorflow.keras.layers import (
     Input, ConvLSTM2D, BatchNormalization, Reshape, LSTM, Dense, Dropout,
     GlobalAveragePooling3D, Multiply, Reshape as KReshape, RepeatVector,
@@ -21,8 +22,10 @@ def squeeze_excitation_block(input_tensor, ratio=8):
 def build_hybrid_conv_lstm_seq2seq(
         n_timesteps, in_H, in_W, in_C,
         out_steps, out_H, out_W, out_C,
-        conv_filters=16,
-        conv_kernel=(3,1),
+        conv_filters=32,
+        conv_kernel=(9,5),
+        conv3d_filters=64,
+        conv3d_kernel=(3,1,1),
         encoder_lstm_units=128,
         decoder_lstm_units=128,
         dropout_rate=0.3,
@@ -40,10 +43,10 @@ def build_hybrid_conv_lstm_seq2seq(
       out_H,out_W,out_C: spatial dims for output at each time step
     """
     # clamp conv kernel to spatial dims (safe-guard)
-    kh, kw = conv_kernel
-    kh = int(min(kh, max(1, in_H)))    # 确保卷积核高度不超过输入高度
-    kw = int(min(kw, max(1, in_W)))    # 确保卷积核高度不超过输入宽度
-    conv_kernel = (kh, kw)
+    # kh, kw = conv_kernel
+    # kh = int(min(kh, max(1, in_H)))    # 确保卷积核高度不超过输入高度
+    # kw = int(min(kw, max(1, in_W)))    # 确保卷积核高度不超过输入宽度
+    # conv_kernel = (kh, kw)
 
     inputs = Input(shape=(n_timesteps, in_H, in_W, in_C), name='encoder_input')  # (batch, T, H, W, C)
 
@@ -53,8 +56,19 @@ def build_hybrid_conv_lstm_seq2seq(
     x = BatchNormalization(name='bn_after_conv')(x)
     x = squeeze_excitation_block(x, ratio=se_ratio)
 
+
+    # conv3D层
+    x = Conv3D(filters=conv3d_filters,
+               kernel_size=conv3d_kernel,
+               padding='same',
+               activation='relu',
+               kernel_regularizer=l2(l2_reg),
+               name='conv3d_after_se')(x)
+    x = BatchNormalization(name='bn_after_conv3d')(x)
+
+
     # Flatten time+space to sequence of features for LSTM
-    feat_dim = in_H * in_W * conv_filters
+    feat_dim = in_H * in_W * conv3d_filters
     x = Reshape(target_shape=(n_timesteps, feat_dim), name='reshape_for_encoder_lstm')(x)
 
     # Encoder LSTM(s)
@@ -83,7 +97,9 @@ if __name__ == "__main__":
     model = build_hybrid_conv_lstm_seq2seq(
         n_timesteps=800, in_H=3, in_W=1, in_C=1,
         out_steps=3000, out_H=9, out_W=1, out_C=3,
-        conv_filters=16, conv_kernel=(3,1),
+        conv_filters=16, conv_kernel=(9,3),
+        conv3d_filters=64,
+        conv3d_kernel=(3, 1, 1),
         encoder_lstm_units=128, decoder_lstm_units=128
     )
     model.summary()

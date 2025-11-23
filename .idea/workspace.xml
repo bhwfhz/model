@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2205f6a8-eb4e-4248-8df7-59d9a82eb995" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/best_model_seq2seq.h5" beforeDir="false" afterPath="$PROJECT_DIR$/best_model_seq2seq.h5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scalers_seq2seq_resampled.npz" beforeDir="false" afterPath="$PROJECT_DIR$/scalers_seq2seq_resampled.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +38,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.eval_test.executor": "Debug",
     "Python.load_acc_data.executor": "Run",
-    "Python.model (1).executor": "Run",
+    "Python.model (1).executor": "Debug",
     "Python.model4.executor": "Run",
     "Python.test.executor": "Run",
     "Python.train.executor": "Run",
@@ -162,9 +163,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.train" />
+        <item itemvalue="Python.model (1)" />
         <item itemvalue="Python.eval_test" />
         <item itemvalue="Python.load_acc_data" />
-        <item itemvalue="Python.model (1)" />
         <item itemvalue="Python.diagnosis" />
       </list>
     </recent_temporary>
